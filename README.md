@@ -52,3 +52,6 @@ export default tseslint.config({
   },
 })
 ```
+
+# ndvs_bank
+This is NDVS project created inReactJs and Typescript...
