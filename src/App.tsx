@@ -30,7 +30,6 @@ import Branches from "./components/pages/Branches"
 import Layout from "./components/pages/Layout"
 import InoperativeAccount from "./components/pages/InoperativeAccount"
 import Deaf from "./components/pages/Deaf"
-import AnnualReport from "./components/pages/AnuualReport"
 import GoldLoan from "./components/pages/GoldLoan"
 import Finance from "./components/pages/Finance"
 import RegularService from "./components/RegularService"
@@ -106,7 +105,6 @@ const App = () => {
             <Route path="/branches" element={<Branches />} />
             <Route path="/inoperative-accounts" element={<InoperativeAccount />} />
             <Route path="/deaf-account-list" element={<Deaf />} />
-            <Route path="/annual-report" element={<AnnualReport />} />
             <Route path="/gold-loan" element={<GoldLoan />} />
             <Route path="/banking-service/finance-statement" element={<Finance />} />
 
@@ -129,7 +127,7 @@ const App = () => {
             {/* <Route path="/vehicle-loan-class-members" element={<VehicleLoanBClassMembers />} /> */}
             <Route path="/gold-morgage-cash-credit" element={<GoldMortgageCashCredit />} />
             <Route path="/housing-loan-merchant" element={<HousingLoanMerchants />} />
-            
+
             <Route path="/mobile-banking" element={<MobileBanking />} />
             <Route path="/atm-services" element={<ATM />} />
             <Route path="/sms-banking" element={<SMSBanking />} />

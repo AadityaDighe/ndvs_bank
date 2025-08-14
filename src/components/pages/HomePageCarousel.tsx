@@ -1,205 +1,3 @@
-// import React, { useEffect } from 'react';
-// import { useKeenSlider } from 'keen-slider/react';
-// import 'keen-slider/keen-slider.min.css';
-// import carouselOne from '@assets/images/home_loan_head.png';
-// import carouselTwo from '@assets/images/carLoan.png';
-// import carouselThree from '@assets/images/education_loan.jpg';
-// import { MdKeyboardArrowRight, MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-// import { FaHandHoldingUsd, FaUniversity, FaCoins } from "react-icons/fa";
-// import { RiMoneyRupeeCircleFill } from "react-icons/ri";
-// import { useNavigate } from 'react-router-dom';
-// import { useTranslation } from 'react-i18next';
-
-// const HomePageCarousel: React.FC = () => {
-//   const { t } = useTranslation();
-//   const navigate = useNavigate();
-
-//   const loanProducts = [
-//     { title: t('accounts_and_deposits'), icon: <RiMoneyRupeeCircleFill className="text-2xl text-blue-600" />, link: '/banking-service/deposit-services' },
-//     { title: t('retail_msme_loan'), icon: <FaHandHoldingUsd className="text-2xl text-blue-600" />, link: '/interest-rates' },
-//     { title: t('gold_loan'), icon: <FaCoins className="text-2xl text-yellow-500" />, link: '/gold-loan' },
-//     { title: t('annual_reports'), icon: <FaUniversity className="text-2xl text-gray-600" />, link: '/banking-service/finance-statement' },
-//   ];
-
-//   const [sliderRef, sliderInstance] = useKeenSlider({
-//     loop: true,
-//     slides: {
-//       perView: 1,
-//       spacing: 30,
-//     },
-//   });
-
-//   // Auto-rotation effect
-//   useEffect(() => {
-//     if (!sliderInstance.current) return;
-
-//     let timeout: NodeJS.Timeout;
-//     let mouseOver = false;
-//     const autoplayInterval = 2000; // 2 seconds
-
-//     const startAutoPlay = () => {
-//       clearTimeout(timeout);
-//       if (!mouseOver) {
-//         timeout = setTimeout(() => {
-//           sliderInstance.current?.next();
-//           startAutoPlay();
-//         }, autoplayInterval);
-//       }
-//     };
-
-//     const handleMouseEnter = () => {
-//       mouseOver = true;
-//       clearTimeout(timeout);
-//     };
-
-//     const handleMouseLeave = () => {
-//       mouseOver = false;
-//       startAutoPlay();
-//     };
-
-//     const sliderContainer = sliderInstance.current.container;
-//     sliderContainer.addEventListener('mouseenter', handleMouseEnter);
-//     sliderContainer.addEventListener('mouseleave', handleMouseLeave);
-
-//     // Start autoplay immediately
-//     startAutoPlay();
-
-//     // Cleanup
-//     return () => {
-//       clearTimeout(timeout);
-//       sliderContainer.removeEventListener('mouseenter', handleMouseEnter);
-//       sliderContainer.removeEventListener('mouseleave', handleMouseLeave);
-//     };
-//   }, [sliderInstance]);
-
-//   // Handle manual navigation
-//   const handlePrev = () => {
-//     sliderInstance.current?.prev();
-//   };
-
-//   const handleNext = () => {
-//     sliderInstance.current?.next();
-//   };
-
-//   return (
-//     <div className="space-y-2 mt-6">
-//       <div className="">
-//         <div className="flex flex-col lg:flex-row gap-4 items-start">
-//           <div className="w-full">
-//             <div className="relative w-full group">
-//               <div className="relative overflow-hidden bg-blue-100 py-4">
-//                 <div className="whitespace-nowrap">
-//                   <span className="inline-block animate-marquee pl-[100%] text-base">
-//                     {t('marquee_notice')}
-//                   </span>
-//                 </div>
-//               </div>
-//               <div ref={sliderRef} className="keen-slider h-[60vh]">
-//                 <div className="keen-slider__slide">
-//                   <img src={carouselOne} alt="carousel-1" className="w-full h-full object-cover rounded-lg" />
-//                 </div>
-//                 <div className="keen-slider__slide">
-//                   <img src={carouselTwo} alt="carousel-2" className="w-full h-full object-cover rounded-lg" />
-//                 </div>
-//                 <div className="keen-slider__slide">
-//                   <img src={carouselThree} alt="carousel-3" className="w-full h-full object-cover rounded-lg" />
-//                 </div>
-//               </div>
-
-//               <button
-//                 className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white bg-black bg-opacity-70 p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all duration-300 z-10"
-//                 onClick={handlePrev}
-//                 aria-label="Previous slide"
-//               >
-//                 <MdArrowBackIos className="text-xl ml-1" />
-//               </button>
-//               <button
-//                 className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white bg-black bg-opacity-70 p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all duration-300 z-10"
-//                 onClick={handleNext}
-//                 aria-label="Next slide"
-//               >
-//                 <MdArrowForwardIos className="text-xl" />
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="relative overflow-hidden bg-blue-900 py-3">
-//         <div className="whitespace-nowrap">
-//           <span className="inline-block animate-marquee pl-[100%] text-white font-medium">
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.deposit')}: <span className="font-bold">7.50%</span></span>
-//             </span>
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.loan')}: <span className="font-bold">9.00%</span></span>
-//             </span>
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.savings')}: <span className="font-bold">3.00%</span></span>
-//             </span>
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.recurring_deposit')}: <span className="font-bold">7.50%</span></span>
-//             </span>
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.small_saving_interest')}: <span className="font-bold">2.00%</span></span>
-//             </span>
-//             <span className="mx-6 inline-flex items-center">
-//               <span className="text-yellow-300 mr-2">★</span>
-//               <span>{t('interest_rates_.small_saving_commission')}: <span className="font-bold">0.15%</span></span>
-//             </span>
-//           </span>
-//         </div>
-//       </div>
-
-//       <div className='bg-blue-900 py-10'>
-//         <div className="container mx-auto px-4">
-//           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//             {loanProducts.map((product, index) => (
-//               <div
-//                 key={index}
-//                 className="bg-white cursor-pointer rounded-lg shadow-xl p-6 py-14 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-//                 onClick={() => navigate(product.link)}
-//               >
-//                 <div className="mb-4 flex items-center gap-3">
-//                   {product.icon}
-//                   <p className="text-lg font-semibold text-gray-800">{product.title}</p>
-//                 </div>
-//                 <div className="flex justify-between items-center">
-//                   <button
-//                     className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 cursor-pointer"
-//                     onClick={(e) => {
-//                       e.stopPropagation();
-//                       navigate(product.link);
-//                     }}
-//                   >
-//                     {t('view')} <MdKeyboardArrowRight className="text-xl" />
-//                   </button>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default HomePageCarousel;
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
@@ -217,8 +15,10 @@ const HomePageCarousel: React.FC = () => {
   const navigate = useNavigate();
 
   const loanProducts = [
-    { title: t('accounts_and_deposits'), icon: <RiMoneyRupeeCircleFill className="text-2xl text-blue-600" />,
-      link: '/banking-service/deposit-services'},
+    {
+      title: t('accounts_and_deposits'), icon: <RiMoneyRupeeCircleFill className="text-2xl text-blue-600" />,
+      link: '/banking-service/deposit-services'
+    },
     { title: t('retail_msme_loan'), icon: <FaHandHoldingUsd className="text-2xl text-blue-600" />, link: '/interest-rates' },
     { title: t('gold_loan'), icon: <FaCoins className="text-2xl text-yellow-500" />, link: '/gold-loan' },
     { title: t('annual_reports'), icon: <FaUniversity className="text-2xl text-gray-600" />, link: '/banking-service/finance-statement' },
@@ -290,7 +90,7 @@ const HomePageCarousel: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-4 items-start">
           <div className="w-full max-w-full">
             <div className="relative w-full group">
-              <div className="relative overflow-hidden bg-blue-100 py-3 sm:py-4" style={{marginTop: '-22px'}}>
+              <div className="relative overflow-hidden bg-blue-100 py-3 sm:py-4" style={{ marginTop: '-22px' }}>
                 <div className="whitespace-nowrap">
                   <span className="inline-block animate-marquee pl-[100%] text-sm sm:text-base">
                     {t('marquee_notice')}
@@ -328,43 +128,7 @@ const HomePageCarousel: React.FC = () => {
         </div>
       </div>
 
-
-                      {/* Previous Marquee Of Loans */}
-
-
-      {/* <div className="relative overflow-hidden bg-blue-900 py-3">
-        <div className="whitespace-nowrap">
-          <span className="inline-block animate-marquee pl-[100%] text-white font-medium text-sm sm:text-base">
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.deposit')}: <span className="font-bold">7.50%</span></span>
-            </span>
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.loan')}: <span className="font-bold">9.00%</span></span>
-            </span>
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.savings')}: <span className="font-bold">3.00%</span></span>
-            </span>
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.recurring_deposit')}: <span className="font-bold">7.50%</span></span>
-            </span>
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.small_saving_interest')}: <span className="font-bold">2.00%</span></span>
-            </span>
-            <span className="mx-4 sm:mx-6 inline-flex items-center">
-              <span className="text-yellow-300 mr-2">★</span>
-              <span>{t('interest_rates_.small_saving_commission')}: <span className="font-bold">0.15%</span></span>
-            </span>
-          </span>
-        </div>
-      </div> */}
-
-
-          {/* New Marquee of loans */}
+      {/* New Marquee of loans */}
 
       <div className="relative overflow-hidden bg-blue-900 py-3">
         <div className="whitespace-nowrap">
@@ -459,14 +223,14 @@ const HomePageCarousel: React.FC = () => {
           </div>
         </div>
       </div> */}
-      
+
       <div className='bg-blue-900 py-8 sm:py-10'>
         <div className="mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {loanProducts.map((product, index) => {
               const gradients = [
                 'from-blue-500 to-blue-600',
-                'from-green-500 to-green-600', 
+                'from-green-500 to-green-600',
                 'from-amber-500 to-amber-600',
                 'from-purple-500 to-purple-600'
               ];
